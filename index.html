@@ -62,6 +62,28 @@
     .nav-left { left: 20px; }
     .nav-right { right: 20px; }
     
+    /* Кнопки зума */
+    .zoom-controls {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 10000;
+    }
+    .zoom-btn {
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .zoom-btn:hover { background: rgba(0,0,0,0.9); }
+    
     .image-counter {
       position: fixed;
       bottom: 20px;
@@ -74,6 +96,18 @@
       font-size: 14px;
       z-index: 10000;
       font-family: monospace;
+    }
+    
+    .zoom-indicator {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: white;
+      z-index: 10000;
     }
   </style>
 </head>
@@ -88,6 +122,7 @@
 
 <div id="content" class="wrap" style="display:none;">
   
+  <!-- РАЗДЕЛ SKIN -->
   <div class="card">
     <div class="section-title">Skin</div>
     
@@ -136,29 +171,62 @@
       <img src="16.gif" alt="Three Kingdoms 4" data-fullidx="15" onclick="openLightbox(15)">
     </div>
   </div>
+
+  <!-- РАЗДЕЛ SHIPS -->
+  <div class="card">
+    <div class="section-title">Ships</div>
+    <div class="project-name">Warships Collection</div>
+    <div class="meta">Work samples — for Wargaming viewing only</div>
+    <div class="grid">
+      <img src="17.gif" alt="Ships 1" data-fullidx="16" onclick="openLightbox(16)">
+      <img src="18.gif" alt="Ships 2" data-fullidx="17" onclick="openLightbox(17)">
+      <img src="19.gif" alt="Ships 3" data-fullidx="18" onclick="openLightbox(18)">
+      <img src="20.gif" alt="Ships 4" data-fullidx="19" onclick="openLightbox(19)">
+      <img src="21.gif" alt="Ships 5" data-fullidx="20" onclick="openLightbox(20)">
+      <img src="22.gif" alt="Ships 6" data-fullidx="21" onclick="openLightbox(21)">
+      <img src="23.gif" alt="Ships 7" data-fullidx="22" onclick="openLightbox(22)">
+      <img src="24.gif" alt="Ships 8" data-fullidx="23" onclick="openLightbox(23)">
+      <img src="25.gif" alt="Ships 9" data-fullidx="24" onclick="openLightbox(24)">
+      <img src="26.gif" alt="Ships 10" data-fullidx="25" onclick="openLightbox(25)">
+      <img src="27.gif" alt="Ships 11" data-fullidx="26" onclick="openLightbox(26)">
+      <img src="28.gif" alt="Ships 12" data-fullidx="27" onclick="openLightbox(27)">
+      <img src="29.gif" alt="Ships 13" data-fullidx="28" onclick="openLightbox(28)">
+      <img src="30.gif" alt="Ships 14" data-fullidx="29" onclick="openLightbox(29)">
+      <img src="31.gif" alt="Ships 15" data-fullidx="30" onclick="openLightbox(30)">
+      <img src="32.gif" alt="Ships 16" data-fullidx="31" onclick="openLightbox(31)">
+    </div>
+  </div>
 </div>
 
 <script>
   const correctPw = "WG0070707";
 
-  // Все изображения в правильном порядке (16 штук)
+  // Все изображения в правильном порядке (32 штуки: 1-16 Skin, 17-32 Ships)
   const allImages = [
+    // Skin раздел (16 изображений)
     "1.gif", "2.gif", "3.gif",   // Binah
     "4.gif", "5.gif", "6.gif",   // Corona
     "7.gif", "8.gif", "9.gif",   // Corals
     "10.gif", "11.gif", "12.gif", // Blücher
-    "13.gif", "14.gif", "15.gif", "16.gif"  // Three Kingdoms
+    "13.gif", "14.gif", "15.gif", "16.gif", // Three Kingdoms
+    // Ships раздел (16 изображений)
+    "17.gif", "18.gif", "19.gif", "20.gif", "21.gif", "22.gif", "23.gif", "24.gif",
+    "25.gif", "26.gif", "27.gif", "28.gif", "29.gif", "30.gif", "31.gif", "32.gif"
   ];
 
   let currentIndex = 0;
+  let currentZoom = 1;  // 1 = оригинальный размер (x0 по логике пользователя)
 
   function openLightbox(index) {
     currentIndex = index;
+    currentZoom = 1;
     const lb = document.getElementById("lightbox");
     const img = document.getElementById("lightbox-img");
     img.src = allImages[currentIndex];
+    img.style.transform = `scale(${currentZoom})`;
     lb.style.display = "flex";
     updateCounter();
+    updateZoomIndicator();
   }
 
   function closeLightbox() {
@@ -167,20 +235,57 @@
 
   function nextImage() {
     currentIndex = (currentIndex + 1) % allImages.length;
+    currentZoom = 1;
     document.getElementById("lightbox-img").src = allImages[currentIndex];
+    document.getElementById("lightbox-img").style.transform = `scale(${currentZoom})`;
     updateCounter();
+    updateZoomIndicator();
   }
 
   function prevImage() {
     currentIndex = (currentIndex - 1 + allImages.length) % allImages.length;
+    currentZoom = 1;
     document.getElementById("lightbox-img").src = allImages[currentIndex];
+    document.getElementById("lightbox-img").style.transform = `scale(${currentZoom})`;
     updateCounter();
+    updateZoomIndicator();
+  }
+
+  function zoomIn() {
+    if (currentZoom < 2) {
+      currentZoom = 2;
+      document.getElementById("lightbox-img").style.transform = `scale(${currentZoom})`;
+      updateZoomIndicator();
+    }
+  }
+
+  function zoomOut() {
+    if (currentZoom > 1) {
+      currentZoom = 1;
+      document.getElementById("lightbox-img").style.transform = `scale(${currentZoom})`;
+      updateZoomIndicator();
+    }
+  }
+
+  function resetZoom() {
+    currentZoom = 1;
+    document.getElementById("lightbox-img").style.transform = `scale(1)`;
+    updateZoomIndicator();
   }
 
   function updateCounter() {
     const counter = document.getElementById("image-counter");
     if (counter) {
       counter.textContent = `${currentIndex + 1} / ${allImages.length}`;
+    }
+  }
+
+  function updateZoomIndicator() {
+    const indicator = document.getElementById("zoom-indicator");
+    if (indicator) {
+      // Показываем x0 для оригинального размера, x2 для увеличенного
+      const displayZoom = currentZoom === 1 ? "0" : "2";
+      indicator.textContent = `${displayZoom}x`;
     }
   }
 
@@ -194,7 +299,7 @@
     }
   }
 
-  // Обработка клавиатуры (стрелки и Escape)
+  // Обработка клавиатуры
   document.addEventListener("keydown", function(e) {
     const lb = document.getElementById("lightbox");
     if (lb.style.display === "flex") {
@@ -207,12 +312,34 @@
       } else if (e.key === "Escape") {
         closeLightbox();
         e.preventDefault();
+      } else if (e.key === "+" || e.key === "=") {
+        zoomIn();
+        e.preventDefault();
+      } else if (e.key === "-" || e.key === "_") {
+        zoomOut();
+        e.preventDefault();
+      } else if (e.key === "0") {
+        resetZoom();
+        e.preventDefault();
       }
     }
   });
+
+  // Зум колесиком мыши
+  document.addEventListener("wheel", function(e) {
+    const lb = document.getElementById("lightbox");
+    if (lb.style.display === "flex") {
+      if (e.deltaY < 0) {
+        zoomIn();
+      } else if (e.deltaY > 0) {
+        zoomOut();
+      }
+      e.preventDefault();
+    }
+  }, { passive: false });
 </script>
 
-<!-- Lightbox (без зума) -->
+<!-- Lightbox -->
 <div id="lightbox" onclick="closeLightbox()" style="
   display:none;
   position:fixed;
@@ -225,20 +352,26 @@
 ">
   <div class="nav-arrow nav-left" onclick="event.stopPropagation(); prevImage();">◀</div>
   
-  <img id="lightbox-img" src="" alt="" style="
-    max-width: 90vw;
-    max-height: 90vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    cursor: default;
-  " onclick="event.stopPropagation();">
+  <div style="overflow: auto; max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center;">
+    <img id="lightbox-img" src="" alt="" style="
+      transition: transform 0.2s ease;
+      cursor: zoom-in;
+      max-width: none;
+      width: auto;
+      height: auto;
+    " onclick="event.stopPropagation(); zoomIn();">
+  </div>
   
   <div class="nav-arrow nav-right" onclick="event.stopPropagation(); nextImage();">►</div>
   
+  <div class="zoom-controls">
+    <button class="zoom-btn" onclick="event.stopPropagation(); zoomOut();">−</button>
+    <button class="zoom-btn" onclick="event.stopPropagation(); resetZoom();">0x</button>
+    <button class="zoom-btn" onclick="event.stopPropagation(); zoomIn();">+</button>
+  </div>
+  
   <div id="image-counter" class="image-counter"></div>
+  <div id="zoom-indicator" class="zoom-indicator">0x</div>
 </div>
 
 </body>
