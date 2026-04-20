@@ -2,191 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Private Portfolio</title>
+  <title>NAVA Studio Portfolio</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
     body { font-family: Inter, Arial, sans-serif; background:#0f1115; color:#e6e6e6; margin:0; padding:40px; }
-    .wrap { max-width: 1100px; margin: 0 auto; }
+    .wrap { max-width: 1100px; margin: 0 auto; text-align: center; }
     .login { max-width: 420px; margin: 120px auto; background:#161a22; padding:24px; border-radius:12px; text-align:center; }
-    .card { background:#161a22; padding:24px; border-radius:16px; margin-bottom:28px; }
-    h1, h2, h3 { margin-top: 0; }
-    .grid { 
-  display:grid; 
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); 
-  gap:18px; 
-}
-    .grid img {
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.grid img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-    .grid img { cursor: zoom-in; }
-    img { width:100%; border-radius:10px; }
-    a { color:#7aa2ff; }
-    .meta { color:#9aa4b2; font-size:14px; }
-    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#0b1220; margin-right:6px; font-size:12px; }
     button, input { padding:10px 12px; border-radius:8px; border:none; }
-    button { cursor:pointer; }
+    button { cursor:pointer; background:#7aa2ff; color:#0f1115; font-weight:bold; }
+    input { background:#0f1115; color:#e6e6e6; border:1px solid #2a2f3a; margin-right:8px; width:180px; }
+    .message { margin-top: 40px; font-size: 18px; color:#9aa4b2; }
   </style>
 </head>
 <body>
 
 <div id="login" class="login">
-  <h2>Private NDA-safe Portfolio</h2>
-  <p>For recruitment purposes only</p>
+  <h2>NAVA Studio Portfolio</h2>
+  <p>Private NDA-safe portfolio</p>
   <input type="password" id="pw" placeholder="Password" />
   <button onclick="checkPw()">Enter</button>
 </div>
 
 <div id="content" class="wrap" style="display:none;">
-
-  <div class="card">
-    <h1>Hard Surface 3D Artist</h1>
-    <p>
-      Hard Surface 3D Artist with 1.5 years of commercial experience creating game-ready assets and MTX cosmetics for live projects at Lesta Games on the Tanks Blitz project.
-      Experienced in full 3D pipeline, including high/low poly modeling, UVs, baking, PBR/nonPBR texturing, LODs, collisions, and in-engine integration.
-      Strong collaborator with concept artists, QA teams, and game designers. Uses AI-assisted tools for MTX concept ideation and early visual exploration to support production workflows. Comfortable working under NDA.
-      Skilled in DAVA Engine and Core Engine.
-      <p><a href="https://tanksblitz.ru/ru/#/" target="_blank">Tanks Blitz</a></p>
-    </p>
-  </div><!-- PROJECT 1 -->
-  <div class="card">
-    <h2>Tanks Blitz — E-50</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration. (No cats were harmed in the making of this 6th image.)</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (6890 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/E-50_1.jpg" alt="E-50 tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/E-50_2.jpg" alt="E-50 tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/E-50_3.jpg" alt="E-50 tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/E-50_4.jpg" alt="E-50 tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/E-50_5.jpg" alt="E-50 tank render 5" onclick="openLightbox(this.src)">
-      <img src="images/E-50_6.jpg" alt="E-50 tank render 6" onclick="openLightbox(this.src)">
-    </div>
-  </div><!-- PROJECT 2 -->
-  <div class="card">
-    <h2>Tanks Blitz — SU-152</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration.</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (7199 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/Su-152_1.jpg" alt="Su-152 tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/Su-152_2.jpg" alt="Su-152 tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/Su-152_3.jpg" alt="Su-152 tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/Su-152_4.jpg" alt="Su-152 tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/Su-152_5.jpg" alt="Su-152 tank render 5" onclick="openLightbox(this.src)">
-    </div>
-  </div><!-- PROJECT 3 -->
-  <div class="card">
-    <h2>Tanks Blitz — Churchill-VII</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration.</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (7199 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/Churchill_VII_1.jpg" alt="Churchill_VII tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/Churchill_VII_2.jpg" alt="Churchill_VII tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/Churchill_VII_3.jpg" alt="Churchill_VII tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/Churchill_VII_4.jpg" alt="Churchill_VII tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/Churchill_VII_5.jpg" alt="Churchill_VII tank render 5" onclick="openLightbox(this.src)">
-    </div>
-  </div><!-- PROJECT 4 -->
-  <div class="card">
-    <h2>Tanks Blitz — Comet</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration.</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (7189 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/Comet_1.jpg" alt="Comet tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/Comet_2.jpg" alt="Comet tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/Comet_3.jpg" alt="Comet tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/Comet_4.jpg" alt="Comet tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/Comet_5.jpg" alt="Comet tank render 5" onclick="openLightbox(this.src)">
-    </div>
-  </div><!-- PROJECT 5 -->
-  <div class="card">
-    <h2>Tanks Blitz — Wz-44</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration.</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (7135 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/Wz_44_1.jpg" alt="Wz_44 tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/Wz_44_2.jpg" alt="Wz_44 tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/Wz_44_3.jpg" alt="Wz_44 tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/Wz_44_4.jpg" alt="Wz_44 tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/Wz_44_5.jpg" alt="Wz_44 tank render 5" onclick="openLightbox(this.src)">
-    </div>
-  </div><!-- PROJECT 6 -->
-  <div class="card">
-    <h2>Tanks Blitz — Cruiser-MKIII</h2>
-    <div class="meta">Full-cycle asset creation from low/high poly modeling to engine integration.</div>
-    <p>
-      <span class="pill">Blender</span>
-      <span class="pill">Substance Painter</span>
-      <span class="pill">Maya</span>
-      <span class="pill">Marmoset</span>
-      <span class="pill">ZBrush</span>
-      <span class="pill">DAVA Engine</span>
-    </p>
-    <p class="meta">Base model (7037 tris): 1 UV set, 2K + Tracks: 1 UV set, 256x256</p>
-    <div class="grid">
-      <img src="images/Cruiser_MK3_1.jpg" alt="Cruiser_MK3 tank render 1" onclick="openLightbox(this.src)">
-      <img src="images/Cruiser_MK3_2.jpg" alt="Cruiser_MK3 tank render 2" onclick="openLightbox(this.src)">
-      <img src="images/Cruiser_MK3_3.jpg" alt="Cruiser_MK3 tank render 3" onclick="openLightbox(this.src)">
-      <img src="images/Cruiser_MK3_4.jpg" alt="Cruiser_MK3 tank render 4" onclick="openLightbox(this.src)">
-      <img src="images/Cruiser_MK3_5.jpg" alt="Cruiser_MK3 tank render 5" onclick="openLightbox(this.src)">
-    </div>
+  <div class="message">
+    <h1>NAVA Studio Portfolio</h1>
+    <p>Coming soon...</p>
+  </div>
 </div>
 
 <script>
-  const correctPw = "3DartDV1379";
-
-  function openLightbox(src) {
-    const lb = document.getElementById("lightbox");
-    const img = document.getElementById("lightbox-img");
-    img.src = src;
-    lb.style.display = "flex";
-  }
-
-  function closeLightbox() {
-    document.getElementById("lightbox").style.display = "none";
-  }
+  const correctPw = "0070707";
 
   function checkPw() {
     const input = document.getElementById("pw").value;
@@ -198,26 +43,6 @@
     }
   }
 </script>
-<!-- Lightbox -->
-<div id="lightbox" onclick="closeLightbox()" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.9);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-">
-  <img id="lightbox-img" src="" alt="" style="
-    max-width: 92vw;
-    max-height: 92vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0,0,0,.6);
-    cursor: zoom-out;
-  ">
-</div>
+
 </body>
 </html>
