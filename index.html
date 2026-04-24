@@ -55,21 +55,6 @@
       user-select: none;
       pointer-events: auto;
     }
-    /* Защита от скриншотов - чёрный оверлей */
-    .screenshot-protection {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0);
-      pointer-events: none;
-      z-index: 999999;
-      transition: background 0.05s ease;
-    }
-    .screenshot-protection.active {
-      background: rgba(0,0,0,1);
-    }
     @media (max-width: 1024px) {
       .grid { grid-template-columns: repeat(3, 1fr); }
       body { padding: 20px; }
@@ -116,8 +101,6 @@
   </style>
 </head>
 <body>
-
-<div id="screenshotProtection" class="screenshot-protection"></div>
 
 <div id="login" class="login">
   <h2>NAVA Studio Portfolio</h2>
@@ -415,7 +398,6 @@
   ];
 
   let currentIndex = 0;
-  let protectionTimeout = null;
 
   function openLightbox(index) {
     currentIndex = index;
@@ -459,32 +441,14 @@
     }
   }
 
-  // Защита от скриншотов
-  function activateScreenshotProtection() {
-    const protection = document.getElementById("screenshotProtection");
-    if (protection) {
-      protection.classList.add("active");
-      if (protectionTimeout) clearTimeout(protectionTimeout);
-      protectionTimeout = setTimeout(() => {
-        protection.classList.remove("active");
-      }, 500);
-    }
-  }
-
-  document.addEventListener("keyup", function(e) {
-    if (e.key === "PrintScreen") {
-      activateScreenshotProtection();
+  document.addEventListener("contextmenu", function(e) {
+    if (e.target.tagName === "IMG") {
+      e.preventDefault();
       return false;
     }
   });
 
   document.addEventListener("keydown", function(e) {
-    if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key === "S") {
-      activateScreenshotProtection();
-    }
-    if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === "3" || e.key === "4")) {
-      activateScreenshotProtection();
-    }
     if ((e.ctrlKey || e.metaKey) && e.key === "s") {
       e.preventDefault();
       return false;
@@ -494,34 +458,6 @@
       return false;
     }
     if (e.key === "F12") {
-      e.preventDefault();
-      return false;
-    }
-  });
-
-  let blurTimer = null;
-  window.addEventListener("blur", function() {
-    if (blurTimer) clearTimeout(blurTimer);
-    blurTimer = setTimeout(() => {
-      activateScreenshotProtection();
-    }, 50);
-  });
-
-  window.addEventListener("focus", function() {
-    if (blurTimer) {
-      clearTimeout(blurTimer);
-      blurTimer = null;
-    }
-    const protection = document.getElementById("screenshotProtection");
-    if (protection) {
-      setTimeout(() => {
-        protection.classList.remove("active");
-      }, 100);
-    }
-  });
-
-  document.addEventListener("contextmenu", function(e) {
-    if (e.target.tagName === "IMG") {
       e.preventDefault();
       return false;
     }
@@ -559,4 +495,15 @@
     max-width: 90vw;
     max-height: 90vh;
     width: auto;
-    height: auto
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6);
+    cursor: default;
+  " onclick="event.stopPropagation();" oncontextmenu="return false" draggable="false">
+  <div class="nav-arrow nav-right" onclick="event.stopPropagation(); nextImage();">►</div>
+  <div id="image-counter" class="image-counter"></div>
+</div>
+
+</body>
+</html>
